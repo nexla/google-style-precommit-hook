@@ -12,8 +12,8 @@ Here's how to set up this pre-commit hook:
 2.  Create a file named `.pre-commit-config.yaml` at the top of your repository with the following content:
     ```yaml
     repos:
-    - repo: [https://github.com/maltzj/google-style-precommit-hook](https://github.com/maltzj/google-style-precommit-hook)
-      sha: 0f5e77a35ebf7b5a1ace7d15a7d1c21b14d6da81
+    - repo: https://github.com/maltzj/google-style-precommit-hook
+      rev: 0f5e77a35ebf7b5a1ace7d15a7d1c21b14d6da81
       hooks:
         - id: google-style-java
           files: \.java$

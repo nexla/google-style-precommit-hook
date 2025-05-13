@@ -18,9 +18,12 @@ repos:
         files: \.java$
 ```
 
-This file stores Google's code style formatter jar in a `.cache/`
-directory so that it doesn't need to be re-downloaded each time.  So, add `.cache/` to the `.gitignore` file of the project which
+Add `.cache/` to the `.gitignore` file of the project which
 uses this hook.
+
+```
+pre-commit install
+```
 
 #### Optional instruction for Intellij User
 

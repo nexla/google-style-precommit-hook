@@ -38,5 +38,6 @@ For IntelliJ users who want their IDE to format code consistently with the pre-c
 4.  Select `Import Scheme...`.
 5.  Choose the [intellij-java-google-style.xml](./intellij-java-google-style.xml) file (make sure this file is present in your project or you have the correct path to it).
 6.  Click `OK`.
+7.  It is also recommended to do `Tools` -> `Actions on Save`. Select both `Reformat Code` and `Optimize Imports`
 
 This will configure IntelliJ to use the same Google Java Style Guide for formatting your code.

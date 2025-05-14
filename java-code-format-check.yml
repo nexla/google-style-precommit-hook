@@ -1,0 +1,28 @@
+name: Java Code Format Check
+
+on:
+  pull_request:
+    paths:
+      - '**/*.java'
+
+jobs:
+  java-format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Optional: Explicit Python setup (if you need a specific version)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Required for Google Java Format
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1

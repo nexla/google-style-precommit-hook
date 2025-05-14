@@ -50,4 +50,8 @@ For IntelliJ users who want their IDE to format code consistently with the pre-c
 
 This will configure IntelliJ to use the same Google Java Style Guide for formatting your code.
 
+#### Github Workflow File
+
+Each repository must place the java-code-format-check.yml[./java-code-format-check.yml] file under its `.github/workflows` directory to enable a GitHub Actions check that prevents malformed Java files from being merged via pull requests.
+
 NOTE- The upstream repo is not maintained and is not accepting [PR](https://github.com/maltzj/google-style-precommit-hook/pull/29) to move to the latest versions of Google Java format. So a fork is being done. 

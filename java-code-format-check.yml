@@ -23,10 +23,27 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .cache
-          key: google-java-format-v1  # change to v2 as jar version changes below
+          key: google-java-format-v1  # change version to v2 if JAR version changes
 
-      - name: Remove corrupt jar (safety net)
-        run: rm -f .cache/google-java-format-1.24.0-all-deps.jar || true
+      # Add JAR download logic here (before pre-commit)
+      - name: Download google-java-format jar if missing
+        run: |
+          VERSION="1.24.0"
+          JAR=".cache/google-java-format-${VERSION}-all-deps.jar"
+          mkdir -p .cache
+          
+          # Remove if corrupt
+          if [ -f "$JAR" ] && ! file "$JAR" | grep -q 'Zip archive data'; then
+            echo "Corrupt JAR detected. Deleting..."
+            rm -f "$JAR"
+          fi
+
+          # Download if missing
+          if [ ! -f "$JAR" ]; then
+            echo "Downloading google-java-format $VERSION..."
+            curl -L -o "$JAR" "https://github.com/google/google-java-format/releases/download/v${VERSION}/google-java-format-${VERSION}-all-deps.jar"
+            chmod 755 "$JAR"
+          fi
 
       - name: Run pre-commit hooks
         uses: pre-commit/action@v3.0.1

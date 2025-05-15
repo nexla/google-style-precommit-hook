@@ -8,21 +8,25 @@ on:
 jobs:
   java-format-check:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # Optional: Explicit Python setup (if you need a specific version)
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      # Required for Google Java Format
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: 'temurin'
 
-      - name: Run pre-commit
+      - name: Cache Google Java Format jar
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: google-java-format-v1  # change to v2 as jar version changes below
+
+      - name: Remove corrupt jar (safety net)
+        run: rm -f .cache/google-java-format-1.24.0-all-deps.jar || true
+
+      - name: Run pre-commit hooks
         uses: pre-commit/action@v3.0.1
